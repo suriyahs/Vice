@@ -44,7 +44,7 @@ PL_COLORS = [
 ]
 
 _COLOR_RE = re.compile(r"#[0-9a-fA-F]{6}")
-# Matches the recorder's clip naming: Vice_Clip_<N>_<Tag>.<ext>, and the same
+# Matches the recorder's clip naming: Flare_Clip_<N>_<Tag>.<ext>, and the same
 # shape for screenshots, which carry the IMAGE_PREFIX below.
 _TAGGED_CLIP_RE = re.compile(r"^(?:img:)?Vice_(?:Clip|Session|Shot)_\d+_(?P<tag>.+)$")
 

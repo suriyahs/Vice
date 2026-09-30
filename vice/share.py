@@ -770,7 +770,7 @@ _EMBED_PAGE = """\
   <meta property="og:type"              content="video.other">
   <meta property="og:url"               content="{page_url}">
   <meta property="og:title"             content="{title}">
-  <meta property="og:description"       content="Clipped with Vice on Linux">
+  <meta property="og:description"       content="Clipped with flare on Linux">
   <meta property="og:video"             content="{video_url}">
   <meta property="og:video:url"         content="{video_url}">
   <meta property="og:video:secure_url"  content="{video_url}">
@@ -1240,7 +1240,7 @@ class ShareServer:
             "share_url":  self.share_url(slug),
             "share_is_public": self.public_is_reachable(),
             # Cache-bust media URLs by clip file identity: deleted clip numbers
-            # get reused (Vice_Clip_5 can name a brand-new file), and a trim
+            # get reused (Flare_Clip_5 can name a brand-new file), and a trim
             # rewrites the file under the same slug, without the version the
             # browser may play a cached older video for the clip it shows.
             "video_url":  f"/v/{enc}?v={thumb_rev}",
