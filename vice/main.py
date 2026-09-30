@@ -846,9 +846,10 @@ class ViceDaemon:
             "state": game,
             "timestamps": {"start": int(self._discord_started_at)},
             "assets": {
-                "large_image": "vice_logo",
-                "large_text": "Vice, Linux clip recorder",
-            },
+                "large_image": "flare",
+                "large_text": "asura: flare",
+                "small_image": "flare",
+                "small_text": "flare",
         }
 
     async def _discord_presence_loop(self) -> None:
