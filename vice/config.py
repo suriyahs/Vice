@@ -124,7 +124,7 @@ class RecordingConfig:
     # How to handle mic capture when wf-recorder cannot combine desktop + mic.
     # "prompt" | "backend_fallback" | "mic_only"
     wf_microphone_strategy: str = "prompt"
-    # Burn the "Clipped with Vice" watermark into exported clips.
+    # Burn the "Clipped with flare" watermark into exported clips.
     # Disabled by default to avoid encoding spikes while gaming.
     apply_watermark: bool = False
     # PulseAudio/PipeWire sink name. "default" works for most setups.
@@ -185,14 +185,14 @@ class OutputConfig:
     # folder of 4 GB videos is nobody's idea of a good time.
     image_directory: str = str(actual_home_dir() / "Pictures" / "Vice")
     filename_format: str = "vice_%Y%m%d_%H%M%S.mp4"
-    # Append the detected game to clip filenames (Vice_Clip_4_Overwatch-2.mp4).
+    # Append the detected game to clip filenames (Flare_Clip_4_Overwatch-2.mp4).
     # Uses the same curated games list as Discord Rich Presence; clips save
     # untagged when no known game is focused or the compositor is unsupported.
     tag_clips_with_game: bool = True
     # Auto-file each clip into a per-game playlist when a known game is focused.
     # Independent of filename tagging; uses the same detection.
     auto_playlist_by_game: bool = True
-    # Override the Vice_Clip_N[_Game] clip filename. Supports $n, $date, $time
+    # Override the Flare_Clip_N[_Game] clip filename. Supports $n, $date, $time
     # and $game; empty keeps the default naming. Session recordings are
     # unaffected. e.g. "clip_$date_$time" -> clip_2026-07-19_1600.mp4
     clip_name_template: str = ""

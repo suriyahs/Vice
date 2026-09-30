@@ -811,7 +811,7 @@
     "restartTitle": "Restart Vice to finish",
     "restartBody": "The sharing settings are saved, but the server only picks up a new port or tunnel setting when the daemon restarts.",
     "clipFilenameHelp": "Leave empty for the default Vice_Clip_4 naming. Use {n} for the clip number, {date}, {time}, and {game} (needs the toggle above). Clips are never overwritten.",
-    "discordEnabledHelp": "Puts \"Clipping <Game> with Vice\" on your Discord profile while a known game is focused. On by default, and window titles are never sent.",
+    "discordEnabledHelp": "Puts \"Clipping <Game> with flare\" on your Discord profile while a known game is focused. On by default, and window titles are never sent.",
     "discordCustomGamesHelp": "One game per line: {format}. Matches are case-insensitive substrings checked against the focused window's process name and class. The bundled list already covers over 300 games.",
     "gsrArgsHelp": "Appended to the recorder command as written. Example: {example}",
     "language": "Language",

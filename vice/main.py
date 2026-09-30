@@ -842,7 +842,7 @@ class ViceDaemon:
 
     def _discord_activity(self, game: str) -> dict:
         return {
-            "details": f"Clipping {game} with Vice",
+            "details": f"Clipping {game} with flare",
             "state": game,
             "timestamps": {"start": int(self._discord_started_at)},
             "assets": {
@@ -853,7 +853,7 @@ class ViceDaemon:
 
     async def _discord_presence_loop(self) -> None:
         """Poll the active window every 5s. When a configured game is focused,
-        push "Clipping <Game> with Vice" to Discord. Clear when no game is
+        push "Clipping <Game> with flare" to Discord. Clear when no game is
         focused. Exits when discord.enabled flips off."""
         from .active_window import (
             detection_tools_status,

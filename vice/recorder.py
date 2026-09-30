@@ -1608,7 +1608,7 @@ def _gsr_replay_candidates(current: set[str], baseline: set[str]) -> set[str]:
     return {
         name
         for name in current - baseline
-        if not name.startswith(("Vice_Clip_", "Vice_Session_"))
+        if not name.startswith(("Flare_Clip_", "Vice_Session_"))
         and not any(t in name for t in (".trim.", ".trimming.", ".wm.", ".fix."))
     }
 
@@ -1750,7 +1750,7 @@ def _next_clip_path(
     template: str = "",
 ) -> Path:
     """Return the next available clip path in out_dir. Uses the user's filename
-    template when set, otherwise Vice_Clip_N[_Game].<ext>."""
+    template when set, otherwise Flare_Clip_N[_Game].<ext>."""
     if template:
         path = _next_templated_path(out_dir, template, ext, tag, datetime.now())
         if path is not None:
@@ -1759,7 +1759,7 @@ def _next_clip_path(
             "Clip name template %r produced no usable filename, using default naming",
             template,
         )
-    return _next_numbered_path(out_dir, "Vice_Clip", ext, tag)
+    return _next_numbered_path(out_dir, "Flare_Clip", ext, tag)
 
 
 def _next_session_path(out_dir: Path, ext: str = "mp4") -> Path:
@@ -1956,7 +1956,7 @@ async def _wait_for_finalized_clip(
 
 
 _WATERMARK = (
-    "drawtext=text='Clipped with Vice'"
+    "drawtext=text='Clipped with flare'"
     ":x=w-tw-12:y=h-th-12"
     ":fontsize=17"
     ":fontcolor=white@0.55"
@@ -2345,7 +2345,7 @@ class GSRRecorder(Recorder):
                     )
                     return None
                 # Rename GSR's auto-generated filename to a sequential
-                # Vice_Clip_N name, tagged with the focused game if known.
+                # Flare_Clip_N name, tagged with the focused game if known.
                 seq_path = _next_clip_path(
                     self._out_dir,
                     ext=newest.suffix.lstrip(".") or "mp4",
