@@ -19,10 +19,10 @@ log = logging.getLogger(__name__)
 
 # Placeholder. Andrew creates a Discord application at
 # https://discord.com/developers/applications, uploads the Vice icon as the
-# `vice_logo` art asset, and pastes the Application ID here before tagging
+# `flare` art asset, and pastes the Application ID here before tagging
 # a release. Until then, users with a `client_id_override` in config can
 # still use their own Discord app.
-DEFAULT_CLIENT_ID = "1496646444726354031"
+DEFAULT_CLIENT_ID = "1554969034175422584"
 
 _OP_HANDSHAKE = 0
 _OP_FRAME = 1
