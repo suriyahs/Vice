@@ -1065,7 +1065,16 @@ class ViceDaemon:
         # User custom games first, explicit user intent beats the bundled list.
         custom = [(g.name, g.matches) for g in self.cfg.discord.custom_games]
         bundled = [(g["name"], g.get("matches")) for g in _DEFAULT_GAMES]
-        return _best_game_match(custom, haystacks) or _best_game_match(bundled, haystacks)
+        matched = _best_game_match(custom, haystacks) or _best_game_match(bundled, haystacks)
+        if matched:
+            return matched
+        # Flare fallback: any Steam game not on the lists, named from its appmanifest.
+        from .active_window import steam_game_name
+        import re as _re
+        if not app_id:
+            m = _re.match(r"steam_app_(\d+)$", cls)
+            app_id = m.group(1) if m else None
+        return steam_game_name(app_id) if app_id else None
 
     def _disk_stats(self) -> Optional[dict]:
         """Free space where clips land, for the Home readout.

@@ -462,3 +462,35 @@ def adapter_name() -> str:
         _get_active_window_kde:      "kde",
         _get_active_window_x11:      "x11",
     }.get(_current_adapter(), "none")
+
+
+def steam_game_name(app_id) -> Optional[str]:
+    """Name of an installed Steam game, read from its appmanifest in any library."""
+    import re
+    app_id = str(app_id or "")
+    if not app_id.isdigit():
+        return None
+    home = Path.home()
+    roots = [
+        home / ".local/share/Steam",
+        home / ".steam/steam",
+        home / ".var/app/com.valvesoftware.Steam/.local/share/Steam",
+    ]
+    try:
+        vdf = (home / ".local/share/Steam/steamapps/libraryfolders.vdf").read_text(errors="replace")
+        roots += [Path(p) for p in re.findall(r'"path"\s+"([^"]+)"', vdf)]
+    except OSError:
+        pass
+    for root in roots:
+        try:
+            text = (root / "steamapps" / f"appmanifest_{app_id}.acf").read_text(errors="replace")
+        except OSError:
+            continue
+        m = re.search(r'"name"\s+"([^"]+)"', text)
+        if not m:
+            continue
+        name = m.group(1).strip()
+        if name.lower().startswith(("proton", "steam linux runtime", "steamworks")):
+            return None
+        return name
+    return None
