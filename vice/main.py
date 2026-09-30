@@ -848,8 +848,7 @@ class ViceDaemon:
             "assets": {
                 "large_image": "flare",
                 "large_text": "asura: flare",
-                "small_image": "flare",
-                "small_text": "flare",
+            },
         }
 
     async def _discord_presence_loop(self) -> None:
