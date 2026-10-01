@@ -851,7 +851,7 @@ class ViceDaemon:
             "timestamps": {"start": int(self._discord_started_at)},
             "assets": {
                 "large_image": "flare",
-                "large_text": "asura: flare",
+                "large_text": "flare",
             },
         }
 
