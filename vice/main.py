@@ -427,6 +427,10 @@ class ViceDaemon:
     def _on_clip_saved(self, path: Path) -> None:
         self._clip_count += 1
         click.echo(f"\n[Vice] Clip saved: {path}")
+        try:
+            subprocess.Popen([str(Path.home() / ".local/bin/vice-folders")], start_new_session=True)
+        except OSError:
+            pass
         if self.share:
             # Session clips are added to the share server inside _stop_session;
             # only add here for regular replay-buffer clips (not sessions).
