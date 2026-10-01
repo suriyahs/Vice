@@ -878,7 +878,7 @@ class ViceDaemon:
         from .discord_rpc import DiscordRPC
         cid = self._discord_configured_client_id()
         if not cid:
-            log.info("Discord RPC enabled but no client_id is set; presence disabled.")
+            log.info("Discord RPC enabled but no client_id is set, presence disabled.")
             return
         self._discord_client_id = cid
         self._discord_rpc = DiscordRPC(cid)
@@ -887,7 +887,7 @@ class ViceDaemon:
             log.info(
                 "Discord Rich Presence is enabled, but active-window detection "
                 "is unavailable on this Wayland session (no XWayland/DISPLAY). "
-                "RPC still connects; games launched via XWayland are detected "
+                "RPC still connects, games launched via XWayland are detected "
                 "when DISPLAY is set."
             )
             self._discord_no_window_adapter_logged = True

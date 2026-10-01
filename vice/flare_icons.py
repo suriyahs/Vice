@@ -1,4 +1,4 @@
-"""Discord application icons for detected games, cached on disk.
+"""Discord application icons for detected games, cached on disk
 
 Looks a game up by name in Discord's detectable-games list, fetches the
 application's icon hash, and returns a CDN URL. Never blocks: network work
