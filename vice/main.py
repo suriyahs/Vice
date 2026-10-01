@@ -845,14 +845,20 @@ class ViceDaemon:
             self._discord_task = asyncio.create_task(self._discord_presence_loop())
 
     def _discord_activity(self, game: str) -> dict:
+        app_id = getattr(self, "_discord_steam_app_id", None)
+        large = (
+            f"https://cdn.cloudflare.steamstatic.com/steam/apps/{app_id}/library_600x900.jpg"
+            if app_id else "flare"
+        )
+        assets = {"large_image": large, "large_text": game if app_id else "flare"}
+        if app_id:
+            assets["small_image"] = "flare"
+            assets["small_text"] = "flare"
         return {
             "details": f"Clipping {game} with flare",
             "state": game,
             "timestamps": {"start": int(self._discord_started_at)},
-            "assets": {
-                "large_image": "flare",
-                "large_text": "flare",
-            },
+            "assets": assets,
         }
 
     async def _discord_presence_loop(self) -> None:
@@ -1070,15 +1076,16 @@ class ViceDaemon:
         custom = [(g.name, g.matches) for g in self.cfg.discord.custom_games]
         bundled = [(g["name"], g.get("matches")) for g in _DEFAULT_GAMES]
         matched = _best_game_match(custom, haystacks) or _best_game_match(bundled, haystacks)
-        if matched:
-            return matched
-        # Flare fallback: any Steam game not on the lists, named from its appmanifest.
-        from .active_window import steam_game_name
         import re as _re
         if not app_id:
             m = _re.match(r"steam_app_(\d+)$", cls)
             app_id = m.group(1) if m else None
-        return steam_game_name(app_id) if app_id else None
+        if not matched and app_id:
+            # Flare fallback: any Steam game not on the lists, named from its appmanifest.
+            from .active_window import steam_game_name
+            matched = steam_game_name(app_id)
+        self._discord_steam_app_id = app_id if matched else None
+        return matched
 
     def _disk_stats(self) -> Optional[dict]:
         """Free space where clips land, for the Home readout.
