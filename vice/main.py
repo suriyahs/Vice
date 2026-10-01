@@ -856,12 +856,16 @@ class ViceDaemon:
 
     def _discord_activity(self, game: str) -> dict:
         app_id = getattr(self, "_discord_steam_app_id", None)
-        large = (
+        from .flare_icons import discord_icon_url
+        icon = discord_icon_url(game)
+        steam_art = (
             f"https://cdn.cloudflare.steamstatic.com/steam/apps/{app_id}/library_600x900.jpg"
-            if app_id else "flare"
+            if app_id else None
         )
-        assets = {"large_image": large, "large_text": game if app_id else "flare"}
-        if app_id:
+        large = icon or steam_art or "flare"
+        has_art = bool(icon or steam_art)
+        assets = {"large_image": large, "large_text": game if has_art else "flare"}
+        if has_art:
             assets["small_image"] = "flare"
             assets["small_text"] = "flare"
         return {
